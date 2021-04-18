@@ -1,19 +1,13 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Automate Projects
-
-# Controls when the action will run. 
-on: [push, workflow_dispatch]
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+name: Add a new GitHub Project card linked to a GitHub issue to the specified project column
+on: [issues, pull_request]
 jobs:
-  # This workflow contains a single job called "build"
-  build:
-    # The type of runner that the job will run on
+  github-actions-automate-projects:
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - name: Automate projects
-        uses: takanabe/github-actions-automate-projects@v0.0.2
+    - name: add-new-issues-to-repository-based-project-column
+      uses: docker://takanabe/github-actions-automate-projects:v0.0.1
+      if: github.event_name == 'issues' && github.event.action == 'opened'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_PROJECT_URL: https://github.com/tbdapp/flutterfrontend/projects/1
+        GITHUB_PROJECT_COLUMN_NAME: To do
