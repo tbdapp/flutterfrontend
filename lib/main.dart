@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Epic Text'),
+      home: MyHomePage(title: 'Noch Epischer Text'),
     );
   }
 }
